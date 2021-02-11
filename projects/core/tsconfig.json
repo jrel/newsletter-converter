@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "CommonJS",
+    "target": "es2016",
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "baseUrl": "src",
+    "declaration": true,
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}

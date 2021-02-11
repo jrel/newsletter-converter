@@ -1,0 +1,9 @@
+{
+  "name": "@newsletter-converter/monospace",
+  "version": "1.0.0",
+  "author": "João Lourenço <jrelourenco@outlook.pt>",
+  "private": true,
+  "workspaces": [
+    "projects/*"
+  ]
+}
