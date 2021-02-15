@@ -5,6 +5,7 @@ import {
 import { GetStaticProps } from 'next';
 import parse from 'html-react-parser';
 import env from '../src/config/env';
+import { useState } from 'react';
 
 const SECOND_IN_MILLISECONDS = 1000;
 
@@ -15,33 +16,22 @@ interface HomeProps {
 }
 
 export default function Home({ articles }: HomeProps) {
+  const [index, setIndex] = useState(0);
+  const handleCOntainerClick = () => {
+    setIndex((current) => current + 1);
+  };
+
   return (
-    <div className='h-screen p-4'>
-      <div className='gap-4 grid grid-cols-1 overflow-y-scroll scroll-container'>
-        <style>
-          {`
-            .scroll-container {
-              scroll-snap-type: y mandatory;
-            }
-            .scroll-item {
-              scroll-snap-align: start;
-            }
-            .scroll-item:last-child {
-              height: 100vh;
-            }
-          `}
-        </style>
-        {articles.map((newObj, i) => (
-          <div key={i} className='scroll-item'>
-            <div className='bg-gray-100 rounded-xl py-4 px-8'>
-              <p className='text-lg '>{parse(newObj.content)}</p>
-            </div>
-          </div>
-        ))}
+    <div className='h-screen p-12' onClick={handleCOntainerClick}>
+      <div className='bg-gray-100 rounded-2xl p-8'>
+        <div className='space-y-4'>
+          <p className='text-3xl'>{parse(articles[index].content)}</p>
+        </div>
       </div>
     </div>
   );
 }
+
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   MongoHelper.uri = env.MONGO_URI;
   const {
