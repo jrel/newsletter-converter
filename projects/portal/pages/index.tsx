@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next';
 import parse from 'html-react-parser';
 import env from '../src/config/env';
 
-const TWO_HOURS_IN_MILLISECONDS = 2 * 60 * 60 * 1000;
+const SECOND_IN_MILLISECONDS = 1000;
 
 interface HomeProps {
   articles: {
@@ -54,6 +54,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
         content,
       })),
     },
-    revalidate: TWO_HOURS_IN_MILLISECONDS,
+    revalidate: 5 * SECOND_IN_MILLISECONDS,
   };
 };

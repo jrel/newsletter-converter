@@ -14,7 +14,7 @@ export class MongoArticlesRepository
       );
       const articles = await collection
         .find({})
-        .sort({ timestamp: 1 })
+        .sort({ timestamp: -1 })
         .toArray();
 
       return MongoHelper.mapCollection(articles);
