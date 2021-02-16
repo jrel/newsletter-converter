@@ -7,8 +7,6 @@ import parse from 'html-react-parser';
 import env from '../src/config/env';
 import { useState } from 'react';
 
-const SECOND_IN_MILLISECONDS = 1000;
-
 interface HomeProps {
   articles: {
     content: string;
@@ -21,6 +19,9 @@ export default function Home({ articles }: HomeProps) {
     setIndex((current) => current + 1);
   };
 
+  if (!articles[index]) {
+    return 'No articles!';
+  }
   return (
     <div className='h-screen p-12' onClick={handleCOntainerClick}>
       <div className='bg-gray-100 rounded-2xl p-8'>
@@ -44,6 +45,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
         content,
       })),
     },
-    revalidate: 5 * SECOND_IN_MILLISECONDS,
+    revalidate: 5,
   };
 };
