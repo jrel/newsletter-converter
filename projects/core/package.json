@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && tsc "
+    "build": "rimraf dist && tsc ",
+    "dev": "yarn build"
   },
   "devDependencies": {
     "@types/mongodb": "^3.6.7",
@@ -16,5 +17,5 @@
     "mongodb": "3.6.3",
     "next-transpile-modules": "^6.3.0",
     "node-html-parser": "^2.1.0"
-  }
+  } 
 }

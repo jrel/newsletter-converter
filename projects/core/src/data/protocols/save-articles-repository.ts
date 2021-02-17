@@ -5,5 +5,5 @@ export interface SaveArticlesRepository {
 }
 
 export namespace SaveArticlesRepository {
-  export interface Params extends SaveArticles.Params{};
+  export interface Params extends SaveArticles.Params {}
 }
