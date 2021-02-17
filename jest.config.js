@@ -1,7 +1,9 @@
 module.exports = {
   clearMocks: true,
-  preset: 'ts-jest',
+  preset: '@shelf/jest-mongodb',
   projects: ['<rootDir>/projects/*/jest.config.js'],
-  testEnvironment: 'node',
+  transform: {
+    '.+\\.ts$': 'ts-jest',
+  },
   testMatch: ['*.spec.ts', '*.spec.tsx'],
 };
