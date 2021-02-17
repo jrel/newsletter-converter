@@ -1,22 +1,28 @@
-import { SaveArticles } from '../../domain/usecases/save-articles';
-import { ArticlesParser } from '../../domain/usecases/articles-parser';
+import {
+  SaveArticles,
+  ArticlesParser,
+  DebugLogger,
+} from '../../domain/usecases';
 import { Controller } from '../../presentation/protocols/controller';
 
 export class MailWebhook implements Controller<MailWebhook.Response> {
+  private static readonly EXPECTED_FROM =
+    '"Filipe Deschamps Newsletter" <newsletter@filipedeschamps.com.br>';
   constructor(
     private readonly articlesParser: ArticlesParser,
-    private readonly saveArticles: SaveArticles
+    private readonly saveArticles: SaveArticles,
+    private readonly logger: DebugLogger
   ) {}
 
   async handle(request: MailWebhook.Request) {
-    if (
-      request.headers.from !==
-      '"Filipe Deschamps Newsletter" <newsletter@filipedeschamps.com.br>'
-    ) {
+    if (request.headers.from !== MailWebhook.EXPECTED_FROM) {
+      this.logger.debug(
+        `Expected "${MailWebhook.EXPECTED_FROM}" but recieve "${request.headers.from}`
+      );
       return {
         statusCode: 400,
         body: {
-          message: 'Illegal sender',
+          message: `Expected "${MailWebhook.EXPECTED_FROM}" but recieve "${request.headers.from}`,
         },
       };
     }
